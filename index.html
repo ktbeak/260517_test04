@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동탄고 급식 알리미 - Smart Meal Planner</title>
+    
+    <!-- SEO and Meta Tags -->
+    <meta name="description" content="화성동탄고등학교의 실시간 급식 정보를 직관적이고 아름다운 UI로 확인하세요. 알레르기 필터 및 영양 성분 정보 제공.">
+    <meta name="keywords" content="화성동탄고등학교, 동탄고, 급식, 식단표, 학교급식, NEIS, 급식알리미">
+    <meta name="author" content="Antigravity">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-blur-circle bg-blur-1"></div>
+    <div class="bg-blur-circle bg-blur-2"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-logo">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="logo-text">
+                    <h1>동탄고 급식 알리미</h1>
+                    <span>DONGTAN HIGH SCHOOL MEAL PLANNER</span>
+                </div>
+            </div>
+            <div class="school-badge-container">
+                <span class="badge badge-office">경기도교육청</span>
+                <span class="badge badge-school">화성동탄고등학교</span>
+            </div>
+        </header>
+
+        <!-- Date Navigation Bar -->
+        <section class="date-navigation-panel">
+            <div class="nav-control-group">
+                <button id="btn-prev" class="nav-btn" aria-label="이전 날짜">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                
+                <div class="date-selector-wrapper">
+                    <input type="date" id="date-picker" class="date-input">
+                    <label for="date-picker" class="date-display-label">
+                        <span id="date-display-text">2026년 05월 18일</span>
+                        <span id="day-badge" class="badge badge-day">월요일</span>
+                    </label>
+                </div>
+                
+                <button id="btn-next" class="nav-btn" aria-label="다음 날짜">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="quick-actions">
+                <button id="btn-today" class="action-btn today-btn">오늘로 가기</button>
+            </div>
+        </section>
+
+        <!-- Controls / Filters -->
+        <section class="filters-panel">
+            <div class="panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="title-icon">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span>설정 필터</span>
+            </div>
+            <div class="filters-group">
+                <label class="toggle-control">
+                    <input type="checkbox" id="toggle-allergens" checked>
+                    <span class="control-indicator"></span>
+                    <span class="control-label">알레르기 정보 표시</span>
+                </label>
+                <label class="toggle-control">
+                    <input type="checkbox" id="toggle-origins">
+                    <span class="control-indicator"></span>
+                    <span class="control-label">원산지 자동 노출</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- Main Meals Board -->
+        <main class="meals-board">
+            <!-- Loading Skeleton (Shown during fetching) -->
+            <div id="meals-skeleton" class="skeleton-grid hidden">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+
+            <!-- Error State / Empty State -->
+            <div id="meals-status" class="status-container hidden">
+                <div class="status-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-svg">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <h3 id="status-title">식단 데이터가 없습니다</h3>
+                <p id="status-desc">선택하신 날짜에는 등록된 급식 정보가 없거나 주말/공휴일입니다.</p>
+            </div>
+
+            <!-- Real Meals Grid -->
+            <div id="meals-grid" class="meals-grid">
+                <!-- Breakfast Card -->
+                <article class="meal-card breakfast-card" id="meal-breakfast">
+                    <div class="card-glow"></div>
+                    <div class="card-header">
+                        <div class="meal-title-group">
+                            <span class="meal-badge badge-bf">조식</span>
+                            <h2>아침 식사</h2>
+                        </div>
+                        <div class="calorie-badge">
+                            <span class="calorie-val">--</span> <span class="calorie-unit">kcal</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="dish-list">
+                            <!-- Populated by script.js -->
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="footer-btn btn-view-nutrition" data-meal="breakfast">
+                            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M3 20v-8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8M3 12V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6M13 20v-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4"/></svg>
+                            영양 성분
+                        </button>
+                        <button class="footer-btn btn-view-origin" data-meal="breakfast">
+                            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            원산지 정보
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Lunch Card -->
+                <article class="meal-card lunch-card" id="meal-lunch">
+                    <div class="card-glow"></div>
+                    <div class="card-header">
+                        <div class="meal-title-group">
+                            <span class="meal-badge badge-ln">중식</span>
+                            <h2>점심 식사</h2>
+                        </div>
+                        <div class="calorie-badge">
+                            <span class="calorie-val">--</span> <span class="calorie-unit">kcal</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="dish-list">
+                            <!-- Populated by script.js -->
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="footer-btn btn-view-nutrition" data-meal="lunch">
+                            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M3 20v-8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8M3 12V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6M13 20v-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4"/></svg>
+                            영양 성분
+                        </button>
+                        <button class="footer-btn btn-view-origin" data-meal="lunch">
+                            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            원산지 정보
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Dinner Card -->
+                <article class="meal-card dinner-card" id="meal-dinner">
+                    <div class="card-glow"></div>
+                    <div class="card-header">
+                        <div class="meal-title-group">
+                            <span class="meal-badge badge-dn">석식</span>
+                            <h2>저녁 식사</h2>
+                        </div>
+                        <div class="calorie-badge">
+                            <span class="calorie-val">--</span> <span class="calorie-unit">kcal</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="dish-list">
+                            <!-- Populated by script.js -->
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="footer-btn btn-view-nutrition" data-meal="dinner">
+                            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M3 20v-8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8M3 12V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6M13 20v-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4"/></svg>
+                            영양 성분
+                        </button>
+                        <button class="footer-btn btn-view-origin" data-meal="dinner">
+                            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            원산지 정보
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+        <!-- Dynamic Origin Info Sections (When auto-show is checked) -->
+        <section id="auto-origins-section" class="auto-origins-section hidden">
+            <div class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="title-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>오늘의 급식 재료 원산지</span>
+            </div>
+            <div id="auto-origins-content" class="origins-content-grid">
+                <!-- Filled dynamically -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer-info">
+            <p>본 급식 정보는 교육부 나이스(NEIS) 오픈 API 실시간 데이터를 연동하여 제공됩니다.</p>
+            <p class="copyright">© 2026 Dongtan School Meal Hub. Powered by NEIS Open API & Antigravity.</p>
+        </footer>
+    </div>
+
+    <!-- Modal for Nutrition Details -->
+    <div id="nutrition-modal" class="modal-overlay hidden" aria-modal="true" role="dialog">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <span class="meal-badge" id="modal-meal-badge">중식</span>
+                    <h3 id="modal-title">영양 성분 구성</h3>
+                </div>
+                <button class="modal-close" id="modal-nutrition-close" aria-label="닫기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="total-cal-indicator">
+                    <span class="indicator-label">총 열량</span>
+                    <span class="indicator-value" id="modal-calorie-val">--</span>
+                    <span class="indicator-unit">kcal</span>
+                </div>
+                <div class="nutrition-list-grid" id="modal-nutrition-grid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Ingredient Origins -->
+    <div id="origin-modal" class="modal-overlay hidden" aria-modal="true" role="dialog">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <span class="meal-badge" id="modal-origin-badge">중식</span>
+                    <h3>재료 원산지 상세</h3>
+                </div>
+                <button class="modal-close" id="modal-origin-close" aria-label="닫기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="origin-list-grid" id="modal-origin-grid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Script -->
+    <script src="script.js"></script>
+</body>
+</html>
